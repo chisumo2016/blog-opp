@@ -6,9 +6,18 @@ include "../function/functions.php";
 //Create an instance
 $db = new Database();
 
-$query ="SELECT * FROM posts order by id DESC";
+$query ="SELECT * FROM posts order by id ASC ";
 
+//Posts
 $posts = $db->select($query);
+
+//Categories
+
+$query ="SELECT * FROM categories ";
+
+$cats = $db->select($query);
+
+
 
 ?>
 <!DOCTYPE html>
@@ -44,12 +53,6 @@ $posts = $db->select($query);
     </div>
 </div>
 
-<div class="blog-header">
-    <div class="container">
-        <h1 class="blog-title">Blog </h1>
-        <p class="lead blog-description">All  About PHP and news </p>
-    </div>
-</div>
 
 <div class="container">
 
@@ -57,5 +60,67 @@ $posts = $db->select($query);
 
         <div class="col-sm-12 blog-main">
 
+            <table class="table table-striped">
+
+                <thead>
+                <tr align="center">
+                    <td colspan="4"><h1>Manage My Post</h1></td>
+                </tr>
+
+
+                <tr>
+                    <th scope="col">Post ID</th>
+                    <th scope="col">Post Title</th>
+                    <th scope="col">Post Author</th>
+                    <th scope="col">Post Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php while($row =$posts->fetch_array()) : ?>
+                <tr>
+                    <th scope="row"><?php echo $row['id'];?></th>
+                    <td>
+                        <a href="edit_post.php?edit=<?php echo $row['id'];?>">
+                        <?php echo $row['title'];?>
+                        </a>
+                    </td>
+                    <td><?php echo $row['description'];?></td>
+                    <td><?php echo $row['author'];?></td>
+                    <td><?php echo formatDate($row['date']);?></td>
+                </tr>
+              <?php endwhile; ?>
+                </tbody>
+            </table>
+
+            <br>
+            <table class="table table-striped">
+
+                <thead>
+                <tr align="center">
+                    <td colspan="4"><h1>Manage Your Categories</h1></td>
+                </tr>
+
+
+                <tr>
+                    <th scope="col">Category ID</th>
+                    <th scope="col">Category  Name</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php while($row1 = $cats->fetch_array()) :  ?>
+                    <tr>
+                        <th scope="row"><?php echo $row1['id'];?></th>
+                        <td>
+                            <a href="edit_post.php?edit=<?php echo $row1['id'];?>">
+                                <?php echo $row1['name'];?>
+                            </a>
+                        </td>
+
+                    </tr>
+                <?php endwhile ; ?>
+
+                </tbody>
+            </table>
 
         </div><!-- /.blog-main -->
