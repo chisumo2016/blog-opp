@@ -45,8 +45,8 @@ $cats = $db->select($query);
     <div class="container">
         <nav class="nav blog-nav">
             <a class="nav-link active" href="index.php">DashBoard</a>
-            <a class="nav-link" href="#">Add New Post</a>
-            <a class="nav-link" href="#">Add New Category</a>
+            <a class="nav-link" href="add_post.php">Add New Post</a>
+            <a class="nav-link" href="add_category.php">Add New Category</a>
             <a class="nav-link  float-right" href="../index.php">View Blog</a>
             <a class="nav-link pull-right" href="logout.php">Logout</a>
         </nav>
@@ -59,7 +59,6 @@ $cats = $db->select($query);
     <div class="row">
 
         <div class="col-sm-12 blog-main">
-
             <table class="table table-striped">
 
                 <thead>
@@ -71,24 +70,25 @@ $cats = $db->select($query);
                 <tr>
                     <th scope="col">Post ID</th>
                     <th scope="col">Post Title</th>
+                    <th scope="col">Post Description</th>
                     <th scope="col">Post Author</th>
                     <th scope="col">Post Date</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php while($row =$posts->fetch_array()) : ?>
-                <tr>
-                    <th scope="row"><?php echo $row['id'];?></th>
-                    <td>
-                        <a href="edit_post.php?edit=<?php echo $row['id'];?>">
-                        <?php echo $row['title'];?>
-                        </a>
-                    </td>
-                    <td><?php echo $row['description'];?></td>
-                    <td><?php echo $row['author'];?></td>
-                    <td><?php echo formatDate($row['date']);?></td>
-                </tr>
-              <?php endwhile; ?>
+                    <tr>
+                        <th scope="row"><?php echo $row['id'];?></th>
+                        <td>
+                            <a href="edit_post.php?edit=<?php echo $row['id'];?>">
+                                <?php echo $row['title'];?>
+                            </a>
+                        </td>
+                        <td><?php echo $row['description'];?></td>
+                        <td><?php echo $row['author'];?></td>
+                        <td><?php echo formatDate($row['date']);?></td>
+                    </tr>
+                <?php endwhile; ?>
                 </tbody>
             </table>
 
@@ -124,3 +124,5 @@ $cats = $db->select($query);
             </table>
 
         </div><!-- /.blog-main -->
+
+        <?php include "../includes/footer.php";?>
