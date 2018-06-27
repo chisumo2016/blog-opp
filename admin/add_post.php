@@ -6,10 +6,10 @@ include "../function/functions.php";
 //Create an instance
 $db = new Database();
 
-$query ="SELECT * FROM posts order by id ASC ";
+//$query ="SELECT * FROM posts order by id ASC ";
 
-//Posts
-$posts = $db->select($query);
+////Posts
+//$posts = $db->select($query);
 
 //Categories
 
@@ -76,8 +76,10 @@ $cats = $db->select($query);
                 <div class="form-group">
                     <label for="#">Select Category :</label>
                     <select class="form-control" name="cat">
-                        <option>Select Category</option>
 
+                        <?php while($row = $cats->fetch_array()):?>
+                        <option value="<?php echo $row['id'];?>"><?php echo $row['name'];?></option>
+                        <?php endwhile; ?>
                     </select>
 
                 </div>
