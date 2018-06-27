@@ -164,3 +164,18 @@ h6, .h6 {
 .blog-footer p:last-child {
     margin-bottom: 0;
 }
+
+#readmore{
+    float: right;
+    background: silver;
+    color: white;
+    padding:10px;
+    font-weight:bold;
+    text-decoration: none;
+    margin-bottom:5px;
+}
+
+#readmore:hover{
+    color: dodgerblue;
+    background: white;
+}

@@ -61,9 +61,11 @@
                 <h2 class="blog-post-title"><?php echo $row['title'] ;?></h2>
                 <p class="blog-post-meta"><?php echo formatDate($row['date']) ;?> by <a href="#"><?php echo $row['author'] ;?></a></p>
 
-                <img src='images/<?php echo $row['image'] ;?>' width="width="500" height="300" alt="">
+                <img style="float: left; margin-right: 20px; margin-bottom: 10px;" src='images/<?php echo $row['image'] ;?>' width=200" height="200" alt="">
 
-                <p><?php echo $row['description'] ;?></p>
+                <p style="text-align: justify"><?php echo substr($row['description'] , 0 , 300);?></p>
+
+                <a id="readmore" href="single_post.php?id=<?php echo $row['id'] ;?>">Read More</a>
                 <hr>
 
 
