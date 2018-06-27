@@ -1,13 +1,14 @@
 <?php
-  include "libs/config.php";
-  include "libs/Database.php";
-  include "function/functions.php";
+include "libs/config.php";
+include "libs/Database.php";
+include "function/functions.php";
 
-  $db = new Database();
+//Create an instance
+$db = new Database();
 
-  $query ="SELECT * FROM posts order by id DESC";
+$query ="SELECT * FROM posts order by id DESC";
 
-  $posts = $db->select($query);
+$posts = $db->select($query);
 
 ?>
 <!DOCTYPE html>

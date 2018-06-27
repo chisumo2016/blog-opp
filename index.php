@@ -5,7 +5,7 @@
     include "includes/sideba.php";
     include "includes/footer.php";
 
-    //Create an instance
 
-$db = new Database();
+
+
 

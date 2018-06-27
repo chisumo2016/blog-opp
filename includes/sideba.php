@@ -1,4 +1,12 @@
+<?php
 
+$db = new Database();
+
+$query ="SELECT * FROM categories ";
+
+$cat = $db->select($query);
+
+?>
 <div class="col-sm-3 offset-sm-1 blog-sidebar">
     <div class="sidebar-module sidebar-module-inset">
         <h4>About</h4>
@@ -7,10 +15,11 @@
     <div class="sidebar-module">
         <h4>Category</h4>
         <ol class="list-unstyled">
-            <li><a href="#">PHP & MYSQL</a></li>
-            <li><a href="#">HTML & CSS</a></li>
-            <li><a href="#">Javascript</a></li>
+            <?php while ($row = $cat->fetch_array()) : ?>
+            <li><a href="category.php?id=<?php echo $row['id']; ?>"><?php echo $row['name'] ?></a></li>
 
+
+            <?php endwhile; ?>
         </ol>
     </div>
 
