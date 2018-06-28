@@ -145,7 +145,8 @@ if(isset($_POST['update']))
 
 
                 <button type="submit" name="update" class="btn btn-success">Update Post</button>
-                <a href="index.php" class="btn btn-danger">Cancel</a>
+                <a href="index.php" class="btn btn-success">Cancel</a>
+                <a href="delete_post.php?id=<?php echo $id; ?>" class="btn btn-danger">Delete</a>
             </form>
 
         </div>
