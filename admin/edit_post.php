@@ -22,9 +22,9 @@ $query = "SELECT * FROM categories ";
 
 $cats = $db->select($query);
 
-//Inserting  post
+//update Inserting  post
 
-if(isset($_POST['submit']))
+if(isset($_POST['update']))
 
 {
 
@@ -50,16 +50,12 @@ if(isset($_POST['submit']))
         move_uploaded_file($image_tmp, "../images/$post_image");
 
         //Inserting
-        $query = "INSERT INTO posts (category_id, title, description, author, image, tags)
-                   VALUES('$cat_id', '$post_title', '$post_description', '$post_author', '$post_image', '$post_tags')";
+        $query = "UPDATE  posts SET  category_id='$cat_id', title='$post_title', description='$post_description', author='$post_author', image='$post_image', tags='$post_tags'
+                                WHERE id = '$id'";
+        $run = $db->update($query);
 
+        unlink("../images/".$single['image']);
 
-        $run = $db->insert($query);
-//        if($db->insert($query) == 'success') {
-//            echo  "posted";
-//        } else  {
-//            echo  "error posting";
-//        }
     }
 }
 
@@ -106,7 +102,7 @@ if(isset($_POST['submit']))
 
         <div class="col-sm-12 blog-main">
 
-            <form action="create_post.php" method="post" enctype="multipart/form-data">
+            <form action="edit_post.php?id=<?php echo $id;?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="#">Post Title :</label>
                     <input type="text" class="form-control" name="post_title"  value="<?php echo $single['title']; ?>" aria-describedby="emailHelp" placeholder="Enter Post Title">
@@ -146,7 +142,7 @@ if(isset($_POST['submit']))
                     <input type="text" class="form-control" name="post_tag" value="<?php echo $single['tags']; ?>" aria-describedby="emailHelp" placeholder="Enter Tag">
 
                 </div>
-                blog/images
+
 
                 <button type="submit" name="update" class="btn btn-success">Update Post</button>
                 <a href="index.php" class="btn btn-danger">Cancel</a>
