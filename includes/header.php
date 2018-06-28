@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include "libs/config.php";
 include "libs/Database.php";
 include "function/functions.php";
@@ -40,6 +42,10 @@ $posts = $db->select($query);
             <a class="nav-link" href="#">Service</a>
             <a class="nav-link" href="#">Post</a>
             <a class="nav-link" href="#">Contact</a>
+            <?php if(!isset($_SESSION['email']))   :?>
+
+            <a class="nav-link " href="admin/index.php">Go to Admin Panel</a>
+             <?php endif ;?>
         </nav>
     </div>
 </div>
