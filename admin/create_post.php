@@ -6,20 +6,56 @@ include "../function/functions.php";
 //Create an instance
 $db = new Database();
 
-//$query ="SELECT * FROM posts order by id ASC ";
+//Select Categories
 
-////Posts
-//$posts = $db->select($query);
-
-//Categories
-
-$query ="SELECT * FROM categories ";
+$query = "SELECT * FROM categories ";
 
 $cats = $db->select($query);
 
+//Inserting  post
 
+if(isset($_POST['submit']))
+
+{
+
+    // Creating local variables fro text
+    $post_title          = $_POST['post_title'];
+    $post_description    = $_POST['post_description'];
+    $cat_id              = $_POST['cat_id'];
+    $post_author         = $_POST['post_author'];
+    $post_tags           = $_POST['post_tag'];
+
+    //Creating variables for image
+
+    $post_image      = $_FILES['post_image']['name'];
+    $image_tmp       = $_FILES['post_image']['tmp_name'];
+
+    //Validating
+    if($post_title=='' || $post_description== '' || $cat_id=='' || $post_author== '' || $post_tags == '' ){
+
+        echo "Please fill in all the fields";
+
+    }else{
+        //Move the image into the folder
+        move_uploaded_file($image_tmp, "../images/$post_image");
+
+        //Inserting
+        $query = "INSERT INTO posts (category_id, title, description, author, image, tags)
+                   VALUES('$cat_id', '$post_title', '$post_description', '$post_author', '$post_image', '$post_tags')";
+
+
+        $run = $db->insert($query);
+//        if($db->insert($query) == 'success') {
+//            echo  "posted";
+//        } else  {
+//            echo  "error posting";
+//        }
+    }
+}
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,8 +81,8 @@ $cats = $db->select($query);
     <div class="container">
         <nav class="nav blog-nav">
             <a class="nav-link active" href="index.php">DashBoard</a>
-            <a class="nav-link" href="#">Add New Post</a>
-            <a class="nav-link" href="#">Add New Category</a>
+            <a class="nav-link" href="create_post.php">Add New Post</a>
+            <a class="nav-link" href="add_category.php">Add New Category</a>
             <a class="nav-link  float-right" href="../index.php">View Blog</a>
             <a class="nav-link pull-right" href="logout.php">Logout</a>
         </nav>
@@ -60,11 +96,10 @@ $cats = $db->select($query);
 
         <div class="col-sm-12 blog-main">
 
-            <form action="add_post.php" method="post" enctype="multipart/form-data">
-
+            <form action="create_post.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="#">Post Title :</label>
-                    <input type="email" class="form-control" name="post_title"  aria-describedby="emailHelp" placeholder="Enter Post Title">
+                    <input type="text" class="form-control" name="post_title"  aria-describedby="emailHelp" placeholder="Enter Post Title">
 
                 </div>
 
@@ -75,10 +110,10 @@ $cats = $db->select($query);
 
                 <div class="form-group">
                     <label for="#">Select Category :</label>
-                    <select class="form-control" name="cat">
-
-                        <?php while($row = $cats->fetch_array()):?>
-                        <option value="<?php echo $row['id'];?>"><?php echo $row['name'];?></option>
+                    <select class="form-control" name="cat_id">
+                        <option value="">Select Category</option>
+                        <?php while($row = $cats->fetch_array()) :?>
+                            <option value="<?php echo $row['id'];?>"><?php echo $row['name'];?></option>
                         <?php endwhile; ?>
                     </select>
 
@@ -86,7 +121,7 @@ $cats = $db->select($query);
 
                 <div class="form-group">
                     <label for="#">Post Author :</label>
-                    <input type="email" class="form-control" name="post_author"  aria-describedby="emailHelp" placeholder="Enter Post Author">
+                    <input type="text" class="form-control" name="post_author"  aria-describedby="emailHelp" placeholder="Enter Post Author">
 
                 </div>
 
@@ -101,9 +136,12 @@ $cats = $db->select($query);
 
                 </div>
 
+
                 <button type="submit" name="submit" class="btn btn-success">Add Post</button>
                 <a href="index.php" class="btn btn-danger">Cancel</a>
             </form>
+
+        </div>
 
         </div>
         </div><!-- /.blog-main -->

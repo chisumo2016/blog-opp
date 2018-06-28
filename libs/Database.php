@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: bundalla
+ * User:
  * Date: 6/26/2018
  * Time: 11:12 PM
  */
@@ -16,6 +16,7 @@ class Database
     //Connecting database connection
 
     public $link;
+
     //Magic
 
     public  function  __construct()
@@ -25,7 +26,8 @@ class Database
 
     private function connect()
     {
-        $this->link = new mysqli($this->host , $this->user,$this->pass, $this->db_name);
+        $this->link = new mysqli($this->host , $this->user, $this->pass, $this->db_name);
+
     }
 
     //Method or function
@@ -44,7 +46,9 @@ class Database
     {
         $insert = $this->link->query($query);
         if($insert){
-            header('location: index.php?insert= Post inserted ..');
+
+            header('Location: index.php?insert= Post inserted ..');
+
         }else{
             echo "Post didn't insert";
         }
