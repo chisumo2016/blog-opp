@@ -46,7 +46,7 @@ $cats = $db->select($query);
         <nav class="nav blog-nav">
             <a class="nav-link active" href="index.php">DashBoard</a>
             <a class="nav-link" href="create_post.php">Add New Post</a>
-            <a class="nav-link" href="create_category.php">Add New Category</a>
+            <a class="nav-link" href="add_category.php">Add New Category</a>
             <a class="nav-link  float-right" href="../index.php">View Blog</a>
             <a class="nav-link pull-right" href="logout.php">Logout</a>
         </nav>
@@ -59,6 +59,14 @@ $cats = $db->select($query);
     <div class="row">
 
         <div class="col-sm-12 blog-main">
+            <br>
+            <?php
+                if(isset($_GET['msg'])){
+
+                    echo "<div class='alert alert-success'>" .$_GET['msg'] ."</div>";
+                }
+
+             ?>
             <table class="table table-striped">
 
                 <thead>

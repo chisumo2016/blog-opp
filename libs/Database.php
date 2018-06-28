@@ -47,7 +47,7 @@ class Database
         $insert = $this->link->query($query);
         if($insert){
 
-            header('Location: index.php?insert= Post inserted ..');
+            header('Location: index.php?msg= Post inserted ..');
 
         }else{
             echo "Post didn't insert";
@@ -58,7 +58,7 @@ class Database
     {
         $update = $this->link->query($query);
         if($update){
-            header('location: index.php?insert= Post update ..');
+            header('location: index.php?msg= Post update ..');
         }else{
             echo "Post didn't update";
         }
@@ -69,7 +69,7 @@ class Database
     {
         $insert = $this->link->query($query);
         if($insert){
-            header('location: index.php?insert= Post deleted..');
+            header('location: index.php?msg= Post deleted..');
         }else{
             echo "Post didn't deleted";
         }
