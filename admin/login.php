@@ -1,3 +1,4 @@
+<?php session_start() ; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +36,8 @@
                     <div class="form">
                         <form class="register-form">
 
-                            <input type="text" placeholder="email address"/>
-                            <input type="password" placeholder="password"/>
+                            <input type="text" name="email" placeholder="email address"/>
+                            <input type="password" name="password" placeholder="password"/>
                             <button type="submit" name="login" id="login-button">Login</button>
                             <p class="message">Already registered? <a href="#">Sign In</a></p>
                         </form>
@@ -51,3 +52,34 @@
     </div>
 
 </div>
+
+<?php
+include "../libs/config.php";
+include "../libs/Database.php";
+
+//Create an instance
+$db = new Database();
+
+if (isset($_POST['login']))
+{
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+
+    $query = "SELECT * FROM admin WHERE email ='$email' AND password='$pass'";
+
+    $user = $db->select($query);
+
+    //check number of rows in the table
+    $check = $user->num_rows;
+
+    if ($check > 0){
+        $_SESSION['email'] =$email;
+        header("Location: index.php?msg = Successfully Logged in!");
+    }else{
+        echo "<script>alert('Password or Email is not correct')</script>";
+    }
+}
+
+
+
+?>
