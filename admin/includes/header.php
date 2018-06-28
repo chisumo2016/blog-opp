@@ -88,7 +88,7 @@ $cats = $db->select($query);
                     <tr>
                         <th scope="row"><?php echo $row['id'];?></th>
                         <td>
-                            <a href="edit_post.php?edit=<?php echo $row['id'];?>">
+                            <a href="edit_post.php?id=<?php echo $row['id'];?>">
                                 <?php echo $row['title'];?>
                             </a>
                         </td>
@@ -120,7 +120,7 @@ $cats = $db->select($query);
                     <tr>
                         <th scope="row"><?php echo $row1['id'];?></th>
                         <td>
-                            <a href="edit_post.php?edit=<?php echo $row1['id'];?>">
+                            <a href="edit_post.php?id=<?php echo $row1['id'];?>">
                                 <?php echo $row1['name'];?>
                             </a>
                         </td>
